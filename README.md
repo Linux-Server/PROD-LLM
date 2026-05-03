@@ -7,6 +7,14 @@
 
 
 
+### Authetication
+### JWT, (JWT, refrest token), AUTH2.0 , 2.0
+
+/predict --> safety mesures , authictae, rate limiting( DDOs), 
+
+
+
+
 
 
 

@@ -6,5 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.136.1",
+    "langchain-openai>=1.2.1",
     "locust>=2.43.4",
+    "python-dotenv>=1.2.2",
+    "torch>=2.11.0",
+    "transformers>=5.7.0",
 ]
