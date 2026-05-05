@@ -1,11 +1,9 @@
 from locust import HttpUser, between, task
 
 
-class APIUser(HttpUser):
-    wait_time = between(1, 3)
+class WorkUser(HttpUser):
+    wait_time = between(0, 0)
 
-    @task(1)
-    def root(self):
-        self.client.post("/")
-
-    
+    @task
+    def hit_work(self):
+        self.client.get("/work")

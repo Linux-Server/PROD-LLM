@@ -1,32 +1,17 @@
+import asyncio
+import hashlib
+
 from fastapi import FastAPI
-from fastapi.responses import StreamingResponse
-from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
-from pydantic import BaseModel
-
-load_dotenv()
-llm = ChatOpenAI(model="gpt-5-nano")
-
 
 app = FastAPI()
 
 
-class ChatIn(BaseModel):
-    messages: str
+@app.get("/work")
+async def work(io_ms: int = 50, cpu_iters: int = 20_000):
+    await asyncio.sleep(io_ms / 1000)
 
+    h = b"seed"
+    for _ in range(cpu_iters):
+        h = hashlib.sha256(h).digest()
 
-async def call_llm(messages: str):
-    return await llm.ainvoke(messages)
-
-
-async def stream_llm(messages: str):
-    async for chunk in llm.astream(messages):
-        if chunk.content:
-            yield chunk.content
-
-
-@app.post("/")
-async def root(payload: ChatIn):
-    res = await call_llm(payload.messages)
-    return {"message": res.content}
-
+    return {"io_ms": io_ms, "cpu_iters": cpu_iters, "hash": h.hex()[:16]}
