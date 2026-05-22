@@ -34,6 +34,14 @@ Optimize TPOT:
  - Tensor Parallelism
  - Use Faster Kernels (flash attention 2)
  - KV Cache Optimization
+- Quantization
+  - prequantized model
+    - AWQ -
+      - int4/int8
+      - caliberation dataset
+    - GPTQ
+  - runtime quant (h100 - fp8)
+- Batching
 
 
 Practical for Latency
